@@ -184,38 +184,55 @@ void usercontrol(void) {
   //settings
   //////////////////////////
   //drivetrain
-  double deadzone = 5;
-  double maxVoltage = 12.0;
-  double turnImportance = 0.5;
+  double deadzone = 3;
+  double maxDriveVoltage = .12;
+  //edit this to tune turning sensitivity
+  double maxTurnVoltage = .08;
+  //edit this to tune swing sensitivity
+  double turnImportance = .6;
   double fwdVal = 0;
   double turnVal = 0;
-
+  double turnVolts = 0;
+  double forwardVolts = 0;
   /////////////////////////////////////////////////////////////////////////////
   while (1) {
-
+    
     ///////////////////////////////////////////////////////////////////////////
     //drivetrain
     //////////////////////////
     //get controller input
-    if(abs(master.Axis3.position()) >= deadzone){
-        fwdVal = (master.Axis3.position())/100;
+    if(abs(master.Axis3.position()) >= deadzone || abs(master.Axis4.position()) >= deadzone){
+        fwdVal = (master.Axis3.position());
+        turnVal = (master.Axis4.position());
     }
     else{
         fwdVal = 0;
-    }
-    //turn left/right
-    if(abs(master.Axis1.position()) >= deadzone){
-        turnVal = (master.Axis1.position())/100;
-    }
-    else{
         turnVal = 0;
     }
+    //turn left/right
+  //  if(abs(master.Axis4.position()) >= deadzone){
+  //       turnVal = (master.Axis4.position());
+  //   }
+  //   else{
+  //       turnVal = 0;
+  //   }
     //convert controller input into voltage inputs  
-    double turnVolts = turnVal * 12;
-    double forwardVolts = fwdVal * 12 * (1 - (abs(turnVolts)*12.0) * turnImportance);
+    turnVolts = turnVal * maxTurnVoltage;
+    forwardVolts = fwdVal * maxDriveVoltage * (1 - (abs(turnVolts)*.12) * turnImportance);
     //set the motors to the voltages designated above
     rightDrive.spin(forward, forwardVolts - turnVolts, voltageUnits::volt);
     leftDrive.spin(forward, forwardVolts + turnVolts, voltageUnits::volt);
+    if(fwdVal == 0 && turnVal == 0){
+        rightDrive.stop(brakeType::brake);
+        leftDrive.stop(brakeType::brake);
+    }
+
+
+    master.Screen.clearScreen();
+    master.Screen.setCursor(1,1);
+    master.Screen.print(master.Axis3.position());
+    master.Screen.setCursor(2,1);
+    master.Screen.print(master.Axis4.position());
     /////////////////////////////////////////////////////////////////////////////
     //catapult
     //////////////////////////
