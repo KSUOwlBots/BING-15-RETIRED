@@ -26,27 +26,27 @@ Drive chassis(
 //Specify your drive setup below. There are seven options:
 //ZERO_TRACKER_NO_ODOM, ZERO_TRACKER_ODOM, TANK_ONE_ENCODER, TANK_ONE_ROTATION, TANK_TWO_ENCODER, TANK_TWO_ROTATION, HOLONOMIC_TWO_ENCODER, and HOLONOMIC_TWO_ROTATION
 //For example, if you are not using odometry, put ZERO_TRACKER_NO_ODOM below:
-ZERO_TRACKER_NO_ODOM,
+ZERO_TRACKER_ODOM,
 
 //Add the names of your Drive motors into the motor groups below, separated by commas, i.e. motor_group(Motor1,Motor2,Motor3).
 //You will input whatever motor names you chose when you configured your robot using the sidebar configurer, they don't have to be "Motor1" and "Motor2".
 
 //Left Motors:
-motor_group(),
+motor_group(leftMotorA, leftMotorB, leftMotorC),
 
 //Right Motors:
-motor_group(),
+motor_group(rightMotorA, rightMotorB, rightMotorC),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT1,
+PORT5,
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
-3.25,
+2.75,
 
 //External ratio, must be in decimal, in the format of input teeth/output teeth.
 //If your motor has an 84-tooth gear and your wheel has a 60-tooth gear, this value will be 1.4.
 //If the motor drives the wheel directly, this value is 1:
-0.6,
+0.91,
 
 //Gyro scale, this is what your gyro reads when you spin the robot 360 degrees.
 //For most cases 360 will do fine here, but this scale factor can be very helpful when precision is necessary.
@@ -180,20 +180,67 @@ void autonomous(void) {
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) {
-  // User control code here, inside the loop
+  /////////////////////////////////////////////////////////////////////////////
+  //settings
+  //////////////////////////
+  //drivetrain
+  double deadzone = 5;
+  double maxVoltage = 12.0;
+  double turnImportance = 0.5;
+  double fwdVal = 0;
+  double turnVal = 0;
+
+  /////////////////////////////////////////////////////////////////////////////
   while (1) {
-    // This is the main execution loop for the user control program.
-    // Each time through the loop your program should update motor + servo
-    // values based on feedback from the joysticks.
 
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to
-    // update your motors, etc.
-    // ........................................................................
+    ///////////////////////////////////////////////////////////////////////////
+    //drivetrain
+    //////////////////////////
+    //get controller input
+    if(abs(master.Axis3.position()) >= deadzone){
+        fwdVal = (master.Axis3.position())/100;
+    }
+    else{
+        fwdVal = 0;
+    }
+    //turn left/right
+    if(abs(master.Axis1.position()) >= deadzone){
+        turnVal = (master.Axis1.position())/100;
+    }
+    else{
+        turnVal = 0;
+    }
+    //convert controller input into voltage inputs  
+    double turnVolts = turnVal * 12;
+    double forwardVolts = fwdVal * 12 * (1 - (abs(turnVolts)*12.0) * turnImportance);
+    //set the motors to the voltages designated above
+    rightDrive.spin(forward, forwardVolts - turnVolts, voltageUnits::volt);
+    leftDrive.spin(forward, forwardVolts + turnVolts, voltageUnits::volt);
+    /////////////////////////////////////////////////////////////////////////////
+    //catapult
+    //////////////////////////
+    //cata code here
 
+    /////////////////////////////////////////////////////////////////////////////
+    //intake
+    //////////////////////////
+    //intake code here
+    
+    /////////////////////////////////////////////////////////////////////////////
+    //macros
+    //////////////////////////
+    //macro code here
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////////////
+    //IGNORE THIS
+    //////////////////////////
     //Replace this line with chassis.control_tank(); for tank drive 
     //or chassis.control_holonomic(); for holo drive.
-    chassis.control_arcade();
+    // chassis.control_arcade();
+    /////////////////////////////////////////////////////////////////////////////
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
