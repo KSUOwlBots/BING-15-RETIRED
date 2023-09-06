@@ -1,0 +1,18 @@
+{
+	"project": {
+		"name": "BING-15-MAIN",
+		"slot": 1,
+		"description": "bing bong your doritos are gone",
+		"platform": "V5",
+		"creationDate": "Wed, 06 Sep 2023 13:00:29 GMT",
+		"language": "cpp",
+		"sdkVersion": "V5_20220726_10_00_00",
+		"cpp": {
+			"includePath": []
+		}
+	},
+	"extension": {
+		"version": "0.5.0",
+		"json": 1
+	}
+}
