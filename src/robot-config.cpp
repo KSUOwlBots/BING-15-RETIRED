@@ -25,8 +25,9 @@ motor_group leftDrive = motor_group(leftMotorA, leftMotorB, leftMotorC);
 
 //other motors
 //catapult
-motor leftCataMotor = motor(PORT6, ratio18_1, false);
-motor rightCataMotor = motor(PORT7, ratio18_1, true);
+
+motor rightCataMotor = motor(PORT6, ratio36_1, false);
+motor leftCataMotor = motor(PORT7, ratio36_1, true);
 motor_group catapult = motor_group(leftCataMotor, rightCataMotor);
 //intake
 motor intakeMotor = motor(PORT4, ratio18_1, false);

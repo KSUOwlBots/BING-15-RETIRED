@@ -184,10 +184,10 @@ void usercontrol(void) {
   //settings
   //////////////////////////
   //drivetrain
-  double deadzone = 3;
+  double deadzone = 1;
   double maxDriveVoltage = .12;
   //edit this to tune turning sensitivity
-  double maxTurnVoltage = .08;
+  double maxTurnVoltage = .06;
   //edit this to tune swing sensitivity
   double turnImportance = .6;
   double fwdVal = 0;
@@ -201,9 +201,9 @@ void usercontrol(void) {
     //drivetrain
     //////////////////////////
     //get controller input
-    if(abs(master.Axis3.position()) >= deadzone || abs(master.Axis4.position()) >= deadzone){
-        fwdVal = (master.Axis3.position());
-        turnVal = (master.Axis4.position());
+    if(abs(master.Axis1.position()) >= deadzone || abs(master.Axis2.position()) >= deadzone){
+        fwdVal = (master.Axis2.position());
+        turnVal = (master.Axis1.position());
     }
     else{
         fwdVal = 0;
@@ -237,11 +237,30 @@ void usercontrol(void) {
     //catapult
     //////////////////////////
     //cata code here
-
+    if(master.ButtonL1.pressing()){
+      catapult.spin(forward, 12, voltageUnits::volt);
+    }
+    else if(master.ButtonL2.pressing()){
+      catapult.spin(forward, -12, voltageUnits::volt);
+    }
+    else{
+      catapult.stop(brakeType::brake);
+    }
     /////////////////////////////////////////////////////////////////////////////
     //intake
     //////////////////////////
     //intake code here
+    //intake
+    if(master.ButtonR1.pressing()){
+      intakeMotor.spin(forward, 12, voltageUnits::volt);
+    }
+    //outtake
+    else if(master.ButtonL2.pressing()){
+      intakeMotor.spin(forward, -12, voltageUnits::volt);
+    }
+    else{
+      intakeMotor.stop(brakeType::brake);
+    }   
     
     /////////////////////////////////////////////////////////////////////////////
     //macros
