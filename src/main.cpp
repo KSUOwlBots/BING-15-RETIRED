@@ -183,17 +183,17 @@ void usercontrol(void) {
   /////////////////////////////////////////////////////////////////////////////
   //settings
   //////////////////////////
-  //drivetrain
-  double deadzone = 1;
-  double maxDriveVoltage = .12;
-  //edit this to tune turning sensitivity
-  double maxTurnVoltage = .06;
-  //edit this to tune swing sensitivity
-  double turnImportance = .6;
-  double fwdVal = 0;
-  double turnVal = 0;
-  double turnVolts = 0;
-  double forwardVolts = 0;
+  // //drivetrain
+  // double deadzone = 1;
+  // double maxDriveVoltage = .12;
+  // //edit this to tune turning sensitivity
+  // double maxTurnVoltage = .06;
+  // //edit this to tune swing sensitivity
+  // double turnImportance = .6;
+  // double fwdVal = 0;
+  // double turnVal = 0;
+  // double turnVolts = 0;
+  // double forwardVolts = 0;
   ///////////////////////////
   //pre opcontrol macros
   ////////////////////////////
@@ -204,7 +204,7 @@ void usercontrol(void) {
     ///////////////////////////////////////////////////////////////////////////
     //drivetrain
     //////////////////////////
-    drive_arcade_standard();
+    arcadeDrive();
   //   //get controller input
   //   if(abs(master.Axis1.position()) >= deadzone || abs(master.Axis2.position()) >= deadzone){
   //       fwdVal = (master.Axis2.position());
