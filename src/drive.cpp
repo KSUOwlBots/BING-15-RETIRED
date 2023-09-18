@@ -35,7 +35,7 @@ void joy_thresh_opcontrol(double l_stick, double r_stick) {
     if (active_brake_kp != 0) reset_drive_sensors();
   }
   // When joys are released, run active brake (P) on drive
-  else {
+  else { 
     leftDrive.spin(directionType::fwd, (0 - leftDrive.position(degrees)) * active_brake_kp*.12, voltageUnits::volt);
     rightDrive.spin(directionType::fwd, (0 - rightDrive.position(degrees)) * active_brake_kp*.12, voltageUnits::volt);
   }
