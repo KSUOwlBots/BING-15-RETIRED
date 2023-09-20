@@ -244,6 +244,7 @@ void usercontrol(void) {
     //intake code here
     //intake
     intakeOpControl();
+    intakeActuate();
     
     /////////////////////////////////////////////////////////////////////////////
     //macros
