@@ -201,21 +201,21 @@ void usercontrol(void) {
   //pre opcontrol macros
   ////////////////////////////
   reset_drive_sensors();
-  // cataTune();
+  cataTune();
   bool cataiterator = false;
 
-  
-
-
+  catapult.stop(brakeType::hold);
   /////////////////////////////////////////////////////////////////////////////
   while (1) {
+      // catapult.stop(brakeType::hold);
+
     //catapult.stop(brakeType::hold);
     //sensor testing
-    master.Screen.clearScreen();
-    master.Screen.setCursor(1,1);
-    master.Screen.print(catapult.power(watt));
-    master.Screen.setCursor(2,1);
-    master.Screen.print(catapult.position(deg));
+    // master.Screen.clearScreen();
+    // master.Screen.setCursor(1,1);
+    // master.Screen.print(catapult.power(watt));
+    // master.Screen.setCursor(2,1);
+    // master.Screen.print(catapult.position(deg));
     // if(cataiterator == false){
     //   cataReset();
     //   cataiterator = true;
