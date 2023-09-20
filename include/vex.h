@@ -24,6 +24,7 @@
 #include "JAR-Template/PID.h"
 #include "autons.h"
 #include "catapult.h"
+#include "intake.h"
 #include "drive.h"
 
 #define waitUntil(condition)                                                   \

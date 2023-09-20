@@ -11,6 +11,7 @@ brain  Brain;
 //controller
 controller master = controller(primary);
 
+
 //drivetrain
 //right motors
 motor rightMotorA = motor(PORT1, ratio6_1, false);//1
@@ -23,14 +24,20 @@ motor leftMotorB = motor(PORT9, ratio6_1, true);//changed cuz bong//9
 motor leftMotorC = motor(PORT8, ratio6_1, true);//8
 motor_group leftDrive = motor_group(leftMotorA, leftMotorB, leftMotorC);
 
+
 //other motors
 //catapult
-
 motor rightCataMotor = motor(PORT7, ratio36_1, false);
 motor leftCataMotor = motor(PORT4, ratio36_1, true);
 motor_group catapult = motor_group(leftCataMotor, rightCataMotor);
+
+
 //intake
 motor intakeMotor = motor(PORT19, ratio18_1, false);
+
+digital_out intakePiston1 = digital_out(Brain.ThreeWirePort.A);
+digital_out intakePiston2 = digital_out(Brain.ThreeWirePort.B);
+
 
 //sensors
 //inertial

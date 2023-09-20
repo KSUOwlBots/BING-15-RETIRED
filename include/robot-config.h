@@ -18,6 +18,8 @@ extern motor rightCataMotor;
 extern motor_group catapult;
 extern motor intakeMotor;
 extern inertial imu;
+extern digital_out intakePiston1;
+extern digital_out intakePiston2;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

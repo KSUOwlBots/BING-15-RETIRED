@@ -5,6 +5,6 @@
 #include <tuple>
 
 
-void cataTune();
-void cataReset();
-void cataFire();
+void intakeOpControl();
+
+void intakeActuate();

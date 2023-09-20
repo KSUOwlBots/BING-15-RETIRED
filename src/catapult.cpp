@@ -73,15 +73,3 @@ void cataFire(){
 }
 
 
-void intakeRun(){
-  if(master.ButtonR1.pressing()){
-      intakeMotor.spin(forward, 12, voltageUnits::volt);
-    }
-    //outtake
-    else if(master.ButtonR2.pressing()){
-      intakeMotor.spin(forward, -12, voltageUnits::volt);
-    }
-    else{
-      intakeMotor.stop(brakeType::coast);
-    }   
-}
