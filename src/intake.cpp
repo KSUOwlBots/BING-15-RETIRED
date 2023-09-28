@@ -15,10 +15,16 @@ void intakeOpControl(){
 
 
 void intakeActuate(){
-  if(master.ButtonL2.pressing()){
-    intakePiston1.set(!intakePiston1.value()); 
-    intakePiston2.set(!intakePiston2.value());
+  if(master.ButtonUp.pressing()){
+    intakeActuator.spin(directionType::fwd, 12, voltageUnits::volt);
   }
+  else if(master.ButtonDown.pressing()){
+    intakeActuator.spin(directionType::fwd, -12, voltageUnits::volt);
+  }
+  else{
+    intakeActuator.stop(brakeType::hold);
+  }
+
   //incase the code doesnt work
   // if(master.ButtonUp.pressing()){
   //   intakePiston1.set(1);

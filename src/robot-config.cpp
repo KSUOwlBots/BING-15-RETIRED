@@ -35,6 +35,10 @@ motor_group catapult = motor_group(leftCataMotor, rightCataMotor);
 //intake
 motor intakeMotor = motor(PORT19, ratio18_1, false);
 
+motor intakeActuate1 = motor(PORT15, ratio18_1, false);
+motor intakeActuate2 = motor(PORT16, ratio18_1, true);
+motor_group intakeActuator = motor_group(intakeActuate1, intakeActuate2);
+
 digital_out intakePiston1 = digital_out(Brain.ThreeWirePort.A);
 digital_out intakePiston2 = digital_out(Brain.ThreeWirePort.B);
 
